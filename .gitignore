@@ -1,0 +1,155 @@
+# Enhanced RAG Pipeline - Git Ignore
+# PanScience Innovations LLM Specialist Assignment
+
+# Virtual Environment (NEVER commit this!)
+venv/
+.venv/
+ENV/
+env/
+Lib/
+Scripts/
+Include/
+pyvenv.cfg
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Large ML Libraries (often cause size issues)
+*.dll
+*.lib
+*.so
+*.dylib
+*.pyd
+*.whl
+
+# Data and Logs
+data/uploads/
+data/embeddings/
+data/documents/
+data/logs/
+logs/
+*.log
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Temporary Files
+*.tmp
+*.temp
+.cache/
+.tmp/
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# Coverage Reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+.hypothesis/
+
+# PyTest
+.pytest_cache/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Documentation Build
+docs/_build/
+site/
+
+# Docker
+.dockerignore
+
+# Backup Files
+*.bak
+*.backup
+*.old
+
+# Large Media Files
+*.mp4
+*.avi
+*.mov
+*.wmv
+*.flv
+*.mkv
+*.webm
+*.mp3
+*.wav
+*.flac
+*.aac
+*.ogg
+
+# Archive Files
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+*.bz2
+*.xz
+
+# Database Files
+*.db
+*.sqlite
+*.sqlite3
+
+# Model Files (if they're large)
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.hdf5
+*.onnx
+*.pb
+*.tflite
+*.pt
+*.pth
+*.ckpt
+*.safetensors

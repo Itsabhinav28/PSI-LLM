@@ -1,0 +1,1 @@
+Abhinav Mishra is the candidate. Skills include Python, FastAPI, RAG, and Gemini API.
