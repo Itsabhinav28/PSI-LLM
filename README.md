@@ -462,8 +462,8 @@ print(f"Sources: {response['sources']}")
 
 The system features a **modern, responsive web interface** designed for optimal user experience:
 
-### **Interface Screenshot**
-![Enhanced RAG Pipeline Interface](User Interface.png)
+### **Screenshot**
+![Enhanced RAG Pipeline Interface](<src/assets/User Interface.png>)
 
 *Note: If the image doesn't display, the interface is accessible at `http://127.0.0.1:8000/static/index.html`*
 
