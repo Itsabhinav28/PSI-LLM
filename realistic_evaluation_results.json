@@ -1,0 +1,101 @@
+{
+  "timestamp": "2025-09-14 17:29:54",
+  "test_data_source": "realistic_test_data.json",
+  "overall_accuracy_score": 0.0,
+  "results": {
+    "retrieval_metrics": {
+      "@3": {
+        "recall": 0.0,
+        "precision": 0.0,
+        "ndcg": 0.0,
+        "num_queries": 8
+      },
+      "@5": {
+        "recall": 0.0,
+        "precision": 0.0,
+        "ndcg": 0.0,
+        "num_queries": 8
+      },
+      "@10": {
+        "recall": 0.0,
+        "precision": 0.0,
+        "ndcg": 0.0,
+        "num_queries": 8
+      }
+    },
+    "end_to_end_metrics": {
+      "total_queries": 8,
+      "successful_queries": 0,
+      "average_response_time": 10.946018248796463,
+      "average_quality_score": 0.0,
+      "average_keyword_score": 0.0,
+      "query_results": [
+        {
+          "query": "What is PDF format used for?",
+          "response_time": 3.6668081283569336,
+          "quality_score": 0.0,
+          "keyword_score": 0.0,
+          "answer_length": 0,
+          "sources_count": 5
+        },
+        {
+          "query": "What are the benefits of sample PDF files?",
+          "response_time": 3.8111844062805176,
+          "quality_score": 0.0,
+          "keyword_score": 0.0,
+          "answer_length": 0,
+          "sources_count": 5
+        },
+        {
+          "query": "What companies are mentioned in the documents?",
+          "response_time": 8.198898077011108,
+          "quality_score": 0.0,
+          "keyword_score": 0.0,
+          "answer_length": 0,
+          "sources_count": 5
+        },
+        {
+          "query": "What contact information is available?",
+          "response_time": 9.69919729232788,
+          "quality_score": 0.0,
+          "keyword_score": 0.0,
+          "answer_length": 0,
+          "sources_count": 5
+        },
+        {
+          "query": "What file sizes are mentioned?",
+          "response_time": 34.00221848487854,
+          "quality_score": 0.0,
+          "keyword_score": 0.0,
+          "answer_length": 0,
+          "sources_count": 5
+        },
+        {
+          "query": "What are the dummy files used for?",
+          "response_time": 10.180109024047852,
+          "quality_score": 0.0,
+          "keyword_score": 0.0,
+          "answer_length": 0,
+          "sources_count": 5
+        },
+        {
+          "query": "What software is mentioned?",
+          "response_time": 14.656911373138428,
+          "quality_score": 0.0,
+          "keyword_score": 0.0,
+          "answer_length": 0,
+          "sources_count": 5
+        },
+        {
+          "query": "What are the file details?",
+          "response_time": 3.3528192043304443,
+          "quality_score": 0.0,
+          "keyword_score": 0.0,
+          "answer_length": 0,
+          "sources_count": 5
+        }
+      ]
+    },
+    "query_results": []
+  }
+}

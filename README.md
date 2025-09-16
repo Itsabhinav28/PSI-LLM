@@ -614,3 +614,77 @@ pip install --force-reinstall -r requirements.txt
 ---
 
 *This comprehensive guide combines both README and SETUP documentation, providing everything needed to understand, install, configure, and deploy the Enhanced RAG Pipeline system. The project exceeds all assignment requirements while maintaining enterprise-level quality and documentation standards.*
+
+---
+
+## 🏁 DPIIT AI Grand Challenge – Stage‑1 (PS4) Quick Guide
+
+### What Stage‑1 Judges Measure
+- Precision@k (20%), Recall@k (50%), NDCG@k (30%)
+- Combined Score = 0.20×Precision + 0.50×Recall + 0.30×NDCG
+
+### 1) Competition Retriever Toggle (API)
+Use the competition‑grade retriever (BM25 + multi‑dense + CE reranker):
+```powershell
+# Competition mode ON
+$env:RAG_USE_COMP_RETRIEVER=1
+python -m uvicorn src.api.main:app --host 127.0.0.1 --port 8001
+```
+Default mode (no toggle):
+```powershell
+python -m uvicorn src.api.main:app --host 127.0.0.1 --port 8001
+```
+
+### 2) Stage‑1 Metrics Evaluation (local)
+Compute Precision@k, Recall@k, NDCG@k and Combined score:
+```powershell
+python rag_metrics_evaluation.py
+# or the competition-focused evaluator
+python stage1_competition_eval.py
+```
+Outputs: `rag_metrics_results.json` (and/or) `stage1_competition_results.json`
+
+### 3) Mock Dataset (PS4) – How to Prepare
+Option A: If you have split parts under `mock data/` (e.g., `train.tar.gz.part-aa`, `ab`, `ac`, ...):
+```powershell
+copy /b "mock data\train.tar.gz.part-aa"+"mock data\train.tar.gz.part-ab"+"mock data\train.tar.gz.part-ac" "mock data\train.tar.gz"
+```
+Then run submission generator (next section). If parts are incomplete, place the extracted dataset directly.
+
+Option B: Place extracted dataset directly under `mock data/`:
+- Queries file: `mock data/queries.json` (e.g., `[{"id": 1, "query": "..."}, ...]`) or `queries.txt` (one per line)
+- Corpus folder: `mock data/corpus/` containing files (txt/pdf/html/…)
+
+### 4) Generate PS4 Submission Zip
+Produces one JSON per query named `<query_number>.json` and zips them as `GreedyGeeks_PS4.zip`.
+```powershell
+python generate_ps4_submission.py
+```
+- Writes numbered JSONs to `submission_output/`
+- Final zip: `GreedyGeeks_PS4.zip`
+- JSON format per PS4 email:
+```json
+{
+  "query": "<actual text query>",
+  "response": ["file1.ext", "file2.ext", "..."]
+}
+```
+
+### 5) Tips To Maximize Scores
+- High Recall@k: keep `final_k` ≥ 10 in competition retriever; enable query expansion
+- Precision/NDCG: keep cross‑encoder reranking enabled; clean text; ensure clear filenames/metadata
+- Validate locally with `stage1_competition_eval.py` before submitting
+
+### 6) Environment Variables
+```powershell
+$env:GOOGLE_API_KEY="<your_key>"
+$env:GOOGLE_MODEL_ID="gemini-2.5-flash"
+# Competition toggle
+$env:RAG_USE_COMP_RETRIEVER=1
+```
+
+### 7) Submission Window (per email)
+- Submissions every Thursday; first window 17–18 Sept 2025
+- Submit the zip named `<startup_name>_PS4.zip` (here: `GreedyGeeks_PS4.zip`)
+
+---

@@ -31,6 +31,11 @@ from src.rag_pipeline import RAGPipeline
 from src.vector_store.chroma_store import ChromaStore
 from src.document_management.document_manager import DocumentManager
 from src.api.websocket_manager import websocket_manager
+try:
+    # Optional competition retriever
+    from competition_rag_system import CompetitionRAGRetriever
+except Exception:
+    CompetitionRAGRetriever = None
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -178,6 +183,8 @@ if static_dir.exists():
 
 # Initialize RAG pipeline
 rag_pipeline = None
+competition_retriever = None
+use_competition = os.getenv("RAG_USE_COMP_RETRIEVER", "0") == "1"
 
 # Initialize Document Manager (will be done in startup event)
 document_manager = None
@@ -418,6 +425,44 @@ async def query_pipeline(
 ):
     """Query the RAG pipeline with advanced features."""
     try:
+        # If competition mode, route query through competition retriever
+        if use_competition:
+            if not competition_retriever:
+                raise HTTPException(status_code=503, detail="Competition retriever not initialized")
+            start_time = time.time()
+            # Retrieve using competition system
+            results = competition_retriever.retrieve(
+                query=request.question,
+                k=max(5, request.n_results * 10),
+                final_k=request.n_results
+            )
+            processing_time = time.time() - start_time
+            # Build sources compatible with existing schema
+            sources = []
+            for rank, r in enumerate(results, start=1):
+                doc = r.get('document', {})
+                sources.append({
+                    "content": doc.get("text", ""),
+                    "metadata": {"id": doc.get("id", ""), "rank": rank},
+                    "similarity_score": float(r.get("final_score", r.get("fused_score", 0.0))),
+                    "rank": rank,
+                    "source": "competition"
+                })
+            confidence_score = 0.0
+            if sources:
+                avg_sim = sum(s.get("similarity_score", 0.0) for s in sources) / len(sources)
+                confidence_score = max(0.0, min(1.0, (avg_sim + 1) / 2))
+            return QueryResponse(
+                success=True,
+                question=request.question,
+                answer="",  # Stage-1 focuses on retrieval; generation omitted in competition mode
+                sources=sources,
+                retrieval_stats={"mode": "competition", "n_results": len(sources)},
+                processing_time=round(processing_time, 3),
+                query_id=hashlib.md5(f"{request.question}_{time.time()}".encode()).hexdigest()[:8],
+                confidence_score=round(confidence_score, 3)
+            )
+        # Default path: standard RAG pipeline
         if not rag_pipeline:
             raise HTTPException(status_code=503, detail="RAG pipeline not initialized")
         
@@ -1022,7 +1067,7 @@ async def process_all_documents(
 @app.on_event("startup")
 async def startup_event():
     """Initialize RAG pipeline and document manager on startup."""
-    global rag_pipeline, document_manager
+    global rag_pipeline, document_manager, competition_retriever
     try:
         logger.info("Initializing RAG Pipeline - Phase 4...")
         rag_pipeline = RAGPipeline()
@@ -1031,7 +1076,34 @@ async def startup_event():
         logger.info("Initializing Document Manager...")
         document_manager = DocumentManager()
         logger.info("Document Manager initialized successfully")
-        
+
+        # Initialize competition retriever if enabled
+        if use_competition:
+            if CompetitionRAGRetriever is None:
+                logger.error("Competition retriever not available. Install its dependencies and module.")
+            else:
+                logger.info("Competition mode enabled via RAG_USE_COMP_RETRIEVER=1. Initializing...")
+                # Load documents from Chroma into competition retriever
+                try:
+                    store = ChromaStore()
+                    all_docs = store.get_all_documents()
+                    converted = []
+                    for i, d in enumerate(all_docs):
+                        try:
+                            text = getattr(d, 'page_content', None)
+                            meta = getattr(d, 'metadata', {})
+                        except Exception:
+                            text = d.get('content', '') if isinstance(d, dict) else ''
+                            meta = d.get('metadata', {}) if isinstance(d, dict) else {}
+                        if not text:
+                            continue
+                        doc_id = meta.get('chunk_id') or meta.get('id') or meta.get('document_id') or f'doc_{i}'
+                        converted.append({"id": str(doc_id), "text": str(text)})
+                    competition_retriever = CompetitionRAGRetriever()
+                    competition_retriever.index_documents(converted)
+                    logger.info(f"Competition retriever indexed {len(converted)} documents")
+                except Exception as e:
+                    logger.error(f"Failed to initialize competition retriever: {e}")
     except Exception as e:
         logger.error(f"Failed to initialize components: {e}")
         raise

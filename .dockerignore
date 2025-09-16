@@ -1,0 +1,79 @@
+# Enhanced RAG Pipeline - Docker Ignore
+# PanScience Innovations LLM Specialist Assignment
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+.venv/
+ENV/
+env/
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Data (will be mounted as volume)
+data/uploads/
+data/embeddings/
+data/documents/
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+*.md
+*.pdf
+
+# Docker
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# Testing
+test_*.py
+demo_*.py
+*.test.py
+
+# Temporary files
+*.tmp
+*.temp
+.cache/

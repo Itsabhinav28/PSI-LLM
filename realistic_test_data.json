@@ -1,0 +1,177 @@
+{
+  "description": "Realistic test data based on actual documents in the system",
+  "total_queries": 8,
+  "queries": [
+    {
+      "query": "What is PDF format used for?",
+      "expected_keywords": [
+        "PDF",
+        "format",
+        "documents",
+        "viewing",
+        "editing"
+      ],
+      "expected_sources": [
+        "cd0464dd_170761_a66ab55c_1266 pg.pdf"
+      ],
+      "relevant_chunks": [
+        "unknown",
+        "unknown",
+        "unknown",
+        "unknown",
+        "unknown"
+      ]
+    },
+    {
+      "query": "What are the benefits of sample PDF files?",
+      "expected_keywords": [
+        "sample",
+        "PDF",
+        "testing",
+        "development",
+        "file upload"
+      ],
+      "expected_sources": [
+        "cd0464dd_170761_a66ab55c_1266 pg.pdf"
+      ],
+      "relevant_chunks": [
+        "unknown",
+        "unknown",
+        "unknown",
+        "unknown",
+        "unknown"
+      ]
+    },
+    {
+      "query": "What companies are mentioned in the documents?",
+      "expected_keywords": [
+        "Corkery Inc",
+        "Kuvalis-Towne",
+        "O'Connell",
+        "Crona",
+        "Goyette"
+      ],
+      "expected_sources": [
+        "cd0464dd_122858_8ae72050_1266 pg.pdf",
+        "cd0464dd_170761_a66ab55c_1266 pg.pdf"
+      ],
+      "relevant_chunks": [
+        "unknown",
+        "unknown",
+        "unknown",
+        "unknown",
+        "unknown"
+      ]
+    },
+    {
+      "query": "What contact information is available?",
+      "expected_keywords": [
+        "email",
+        "phone",
+        "contact",
+        "@[URL]",
+        "+1-"
+      ],
+      "expected_sources": [
+        "cd0464dd_122858_8ae72050_1266 pg.pdf",
+        "cd0464dd_170761_a66ab55c_1266 pg.pdf"
+      ],
+      "relevant_chunks": [
+        "unknown",
+        "unknown",
+        "unknown",
+        "unknown",
+        "unknown"
+      ]
+    },
+    {
+      "query": "What file sizes are mentioned?",
+      "expected_keywords": [
+        "1 MB",
+        "4 MB",
+        "sample",
+        "file",
+        "size"
+      ],
+      "expected_sources": [
+        "cd0464dd_170761_a66ab55c_1266 pg.pdf"
+      ],
+      "relevant_chunks": [
+        "unknown",
+        "unknown",
+        "unknown",
+        "unknown",
+        "unknown"
+      ]
+    },
+    {
+      "query": "What are the dummy files used for?",
+      "expected_keywords": [
+        "dummy",
+        "files",
+        "testing",
+        "development",
+        "sample"
+      ],
+      "expected_sources": [
+        "cd0464dd_122858_8ae72050_1266 pg.pdf",
+        "cd0464dd_170761_a66ab55c_1266 pg.pdf"
+      ],
+      "relevant_chunks": [
+        "unknown",
+        "unknown",
+        "unknown",
+        "unknown",
+        "unknown"
+      ]
+    },
+    {
+      "query": "What software is mentioned?",
+      "expected_keywords": [
+        "software",
+        "open-source",
+        "readers",
+        "editing",
+        "viewing"
+      ],
+      "expected_sources": [
+        "cd0464dd_170761_a66ab55c_1266 pg.pdf"
+      ],
+      "relevant_chunks": [
+        "unknown",
+        "unknown",
+        "unknown",
+        "unknown",
+        "unknown"
+      ]
+    },
+    {
+      "query": "What are the file details?",
+      "expected_keywords": [
+        "file details",
+        "content",
+        "dummy",
+        "sample",
+        "testing"
+      ],
+      "expected_sources": [
+        "cd0464dd_122858_8ae72050_1266 pg.pdf",
+        "cd0464dd_170761_a66ab55c_1266 pg.pdf"
+      ],
+      "relevant_chunks": [
+        "unknown",
+        "unknown",
+        "unknown",
+        "unknown",
+        "unknown"
+      ]
+    }
+  ],
+  "metadata": {
+    "created_at": "2025-09-14",
+    "document_sources": [
+      "cd0464dd_122858_8ae72050_1266 pg.pdf",
+      "cd0464dd_170761_a66ab55c_1266 pg.pdf"
+    ]
+  }
+}
